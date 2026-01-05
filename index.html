@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <meta name="description" content="Dedykowana strona dla Ewci. Liczniki czasu oraz specjalny prezent w postaci interaktywnej strony internetowej.">
+    <meta name="theme-color" content="#0e0000">
+    <meta property="og:title" content="Dla Ewci ❤️">
+    <meta property="og:description" content="Dedykowana strona dla Ewci z liczekami czasu i specjalnym prezentem.">
+    <meta property="og:image" content="ewa.png">
+    <title>Dla Ewci ❤️</title>
+    <link rel="stylesheet" href="style.css">
+    <style>
+        /* Particle burst effect */
+        @keyframes particleBurst {
+            0% {
+                transform: translate(0, 0) scale(1);
+                opacity: 1;
+            }
+            100% {
+                transform: translate(var(--vx), var(--vy)) scale(0);
+                opacity: 0;
+            }
+        }
+
+        .heart-particle {
+            animation: particleBurst 2s cubic-bezier(0.25, 0.46, 0.45, 0.94) forwards !important;
+        }
+    </style>
+</head>
+<body>
+    <!-- Progress indicator -->
+    <div class="progress-indicator" id="progress-indicator"></div>
+    
+    <!-- Preloader -->
+
+    <div class="preloader" id="preloader">
+        <div class="preloader-spinner"></div>
+        <p class="preloader-text">Ładowanie...</p>
+    </div>
+
+    <div class="bg-glow">
+        <div class="ambient-light"></div>
+    </div>
+
+    <audio id="bg-music" loop preload="auto">
+        <source src="Sounds/loveme.mp3" type="audio/mpeg">
+        Twoja przeglądarka nie wspiera odtwarzania audio.
+    </audio>
+    <audio id="puke-sound" preload="auto">
+        <source src="Sounds/otykurwo.mp3" type="audio/mpeg">
+        Twoja przeglądarka nie wspiera odtwarzania audio.
+    </audio>
+
+    <section id="moment1" class="screen">
+        <div class="header-area" style="margin-top: 20px;">
+            <h1 class="hero-title gradient-text">Zostaniesz moją Walentynką?</h1>
+            <p class="hero-subtitle">"Nigdy nie chciałem więcej, dopóki nie poznałem Ciebie"</p>
+            <p class="hero-source">— 50 Twarzy Greya</p>
+        </div>
+
+        <div class="counters-wrapper">
+            <div class="counter-card glow-text">
+                <p class="counter-label">Nasza historia trwa</p>
+                <div id="poznanie-timer" class="counter-time">...</div>
+            </div>
+            <div class="counter-card glow-text">
+                <p class="counter-label">Oficjalnie Razem</p>
+                <div id="zwiazek-timer" class="counter-time">...</div>
+            </div>
+        </div>
+
+        <div class="btn-container">
+            <button class="btn-tak" id="btn-tak" aria-label="Potwierdź">TAK ❤️</button>
+            <button class="btn-nie" id="btn-nie" aria-label="Odmów">nie 🤮</button>
+        </div>
+    </section>
+
+    <section id="moment2" class="screen hidden">
+        <div style="flex-grow: 1; display: flex; align-items: center; justify-content: center;">
+            <pre class="rose-ascii">
+           .,,.
+          .,v%;mmmmmmmm;%%vv,.
+      ,vvv%;mmmvv;vvvmmm;%vvvv,    .,,.
+   ,, ,vvvnnv%;mmmvv;%%;vvmmm;%vvvv%;mmmmmmm,
+   ,mmmmmm;%%vv%;mmmvv;%%;vvmmm;%v%;mmmmmmmmmmm
+   mmmmmmmmmmm;%%;mmmvv%;vvmmm;%mmmmmmmmmmmmmm'
+   `mmmmmmmmmmmmmm%;mmv;vmmm;mmmmmmm;%vvvvvv'
+    `%%%%%;mmmmmmmm;v%v;mmmmmm;%vvvnnvv'
+     vvvvvv%%%%;mmmm%;mmmmmm;%vvvnnnnvv
+     `vvnnnnvvv%%%;m;mmmmm;%vvnnmmnnvv'
+      vvnmmnnnnvvv%%mmmm;%vvnnmmmnnnvv
+      `vvnmmmnnvvv%mmm;%vvnnmmmmnnnvv'
+       `vvnmmmmvv%mmm;%vvnnmmmmnnnvv'
+        `vvnmmmvv%mm;%vvvnnmmmnnvvv'
+          `vvnmmvv%m;%vvvvnmnvvvv'
+           .;;vvvvvm;%vvvvvvvv'
+           .;;;;;;;;;;;;;;;;;;;;,
+           ;;;;;;';;;;;;;;;;;'`;;;;;,
+          .;;;'    `;;;;;;;;'    `;;;;;.
+         .;;'           `;;;;;'        `;;;;
+         ;'             :`;;'          ;;'
+         ;              : ;'    ,      ,'
+          `             :'.:    .;;,.
+                        ::::    ;;,;;;,
+                        ;;;;    `;;;,;;
+                        ;;;;      `';; ,;;'
+                      ,;;;;;            .';,.
+                        `;;;;         .;'  ';,.
+                         `;;;.      .;'    ,;;,;;,.
+                          ;;;;    .;'      `;;;;,;;;
+                          ;;;;  .;'        `;; ,;;'
+                          `;;;,;;'             `;'
+                           ;;;;
+                           ;;;;
+                           ;;;;
+                           ;;;;
+                           ;;;;
+                           ;;;;
+                           ;;;;
+                           ;;;;
+                           ;;;;
+                           ;;;;;;;;;;;;
+                        
+            </pre>
+        </div>
+        <div style="margin-bottom: 100px;">
+            <div id="timer-val" class="timer-display">15</div>
+            <div class="music-visualizer" id="music-viz" style="display: none;">
+                <div class="visualizer-bar"></div>
+                <div class="visualizer-bar"></div>
+                <div class="visualizer-bar"></div>
+                <div class="visualizer-bar"></div>
+                <div class="visualizer-bar"></div>
+            </div>
+            <div class="progress-container"><div id="progress-bar"></div></div>
+            <p id="loading-text">Poczekaj chwileczkę </p>
+        </div>
+    </section>
+
+    <section id="moment3" class="screen hidden">
+        <div class="photo-gallery" id="photo-gallery">
+            <!-- Zdjęcia będą tutaj generowane przez JavaScript -->
+        </div>
+        
+        <div class="final-content">
+            <p id="final-1" class="shadow-text" style="font-family: 'Montserrat'; font-weight: 300; font-size: 1rem; letter-spacing: 1px;"></p>
+            <h1 id="final-name">Ewcia</h1>
+            <p id="final-2" class="shadow-text" style="font-family: 'Dancing Script'; font-size: 1.6rem;"></p>
+        </div>
+    </section>
+
+    <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
+    <script src="script.js"></script>
+</body>
+</html>
